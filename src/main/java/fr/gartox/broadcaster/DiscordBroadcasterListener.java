@@ -65,7 +65,7 @@ public class DiscordBroadcasterListener implements EventListener {
                 Iterator<Document> iterator = db.getCollection("subscriptions").find(eq("broadcasterChannelId", event.getChannel().getId())).iterator();
                 while (iterator.hasNext()) {
                     TextChannel subChannel = DiscordBroadcaster.getInstance().getJda().getTextChannelById(iterator.next().get("subscriberChannelId").toString());
-                    MessageBuilder builder = new MessageBuilder().setContent(message).stripMentions(event.getGuild()).setEmbed(event.getMessage().getEmbeds().get(0));
+                    MessageBuilder builder = new MessageBuilder().setContent(message).stripMentions(event.getGuild());
                     for (Message.Attachment attachment : event.getMessage().getAttachments()) {
                         builder.append("\n" + attachment.getUrl());
                     }

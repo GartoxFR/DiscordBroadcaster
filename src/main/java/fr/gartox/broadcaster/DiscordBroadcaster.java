@@ -8,6 +8,7 @@ import fr.gartox.broadcaster.command.CommandMap;
 import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.entities.Activity;
 
 import javax.security.auth.login.LoginException;
 import java.net.UnknownHostException;
@@ -42,6 +43,7 @@ public class DiscordBroadcaster implements Runnable {
             mongoClient = new MongoClient("127.0.0.1");
             db = mongoClient.getDatabase("DiscordBroadcaster");
             jda.getEventManager().register(new DiscordBroadcasterListener(db));
+            jda.getPresence().setActivity(Activity.playing("!help"));
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (LoginException e) {
